@@ -114,6 +114,3 @@ Healthcare can be expensive, and many students lack adequate insurance coverage.
 
 One Rupee Care leverages the power of micro-contributions and transparency to solve critical issues of healthcare affordability and social responsibility among students. It fosters a supportive community where small daily actions collectively make a big difference in health security and social welfare.
 
----
-
-Would you like me to help you create a **technical manual**, **user guide**, or **presentation slides** for this project as well?
