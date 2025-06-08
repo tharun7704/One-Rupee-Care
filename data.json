@@ -1,0 +1,81 @@
+{
+  "contributions": [
+    {
+      "username": "ARAI THARUN",
+      "amount": 1,
+      "timestamp": "2025-06-08T08:17:26.343815"
+    },
+    {
+      "username": "2",
+      "amount": 1,
+      "timestamp": "2025-06-08T08:17:34.350434"
+    },
+    {
+      "username": "Ramesh",
+      "amount": 1,
+      "timestamp": "2025-06-08T08:17:44.709651"
+    },
+    {
+      "username": "Dynamic",
+      "amount": 1,
+      "timestamp": "2025-06-08T08:26:14.820351"
+    },
+    {
+      "username": "Dynamic",
+      "amount": 1,
+      "timestamp": "2025-06-08T08:26:19.402356"
+    },
+    {
+      "username": "Dynamic",
+      "amount": 1,
+      "timestamp": "2025-06-08T08:26:21.810350"
+    },
+    {
+      "username": "Dynamic",
+      "amount": 1,
+      "timestamp": "2025-06-08T08:26:23.858624"
+    },
+    {
+      "username": "Dynamic",
+      "amount": 1,
+      "timestamp": "2025-06-08T08:26:25.954093"
+    },
+    {
+      "username": "Dynamic",
+      "amount": 1,
+      "timestamp": "2025-06-08T08:26:27.562097"
+    },
+    {
+      "username": "Dynamic",
+      "amount": 1,
+      "timestamp": "2025-06-08T08:26:29.881980"
+    },
+    {
+      "username": "Dynamic",
+      "amount": 1,
+      "timestamp": "2025-06-08T08:26:32.025222"
+    },
+    {
+      "username": "Tharun",
+      "amount": 1,
+      "timestamp": "2025-06-08T09:25:20.538718"
+    },
+    {
+      "username": "Tharun",
+      "amount": 1,
+      "timestamp": "2025-06-08T09:46:10.509441"
+    }
+  ],
+  "fund_usage": [
+    {
+      "cause": "Heartstoke",
+      "amount": 4,
+      "timestamp": "2025-06-08T08:18:04.525993"
+    },
+    {
+      "cause": "College Event",
+      "amount": 5,
+      "timestamp": "2025-06-08T08:26:50.709709"
+    }
+  ]
+}

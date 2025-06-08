@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>₹1 Project</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+  <h1>Hello, {{ username }}!</h1>
+  <a href="/logout">Logout</a>
+  <h2>Total Collected: ₹{{ total }}</h2>
+
+  <h3>Contribute ₹1 via UPI</h3>
+  <button onclick="payNow()">Pay ₹1 Now</button>
+
+  <h3>Add Fund Usage (Admin)</h3>
+  <form id="usageForm">
+    <input type="text" name="cause" placeholder="Cause" required />
+    <input type="number" name="amount" placeholder="Amount" required />
+    <button type="submit">Add Usage</button>
+  </form>
+
+  <h3>Fund Usage Log</h3>
+  <ul>
+    {% for item in fund_usage %}
+      <li>{{ item.cause }} - ₹{{ item.amount }} on {{ item.timestamp[:10] }}</li>
+    {% endfor %}
+  </ul>
+
+  <script>
+    async function payNow() {
+      const res = await fetch('/create_order', { method: 'POST' });
+      const order = await res.json();
+
+      const options = {
+        "key": "{{ RAZORPAY_KEY_ID }}",  // Passed from Flask backend
+        "amount": order.amount,
+        "currency": "INR",
+        "name": "One Rupee Project",
+        "description": "Daily ₹1 Contribution",
+        "order_id": order.id,
+        "handler": async function (response) {
+          await fetch('/payment_success', { method: 'POST' });
+          alert("Thank you for contributing ₹1!");
+          location.reload();
+        },
+        "theme": {
+          "color": "#3399cc"
+        }
+      };
+      const rzp = new Razorpay(options);
+      rzp.open();
+    }
+
+    document.getElementById("usageForm").onsubmit = async function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      await fetch('/add_usage', { method: 'POST', body: formData });
+      alert('Usage added!');
+      location.reload();
+    };
+  </script>
+</body>
+</html>
