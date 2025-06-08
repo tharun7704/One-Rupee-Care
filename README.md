@@ -1,8 +1,3 @@
-# One-Rupee-Care
-Absolutely! Here's a comprehensive project description/documentation for your **One Rupee Care** project that covers all key aspects such as the concept, objectives, features, technical details, and more. You can customize it further based on your actual implementation.
-
----
-
 # One Rupee Care Project Documentation
 
 ## Project Title
