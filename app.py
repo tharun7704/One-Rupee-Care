@@ -4,7 +4,15 @@ import json
 from datetime import datetime
 import razorpay  # ✅ NEW: Razorpay client
 
+import os
+from flask_dance.contrib.google import make_google_blueprint, google
+
+# allow HTTP (dev only)
+os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
+
+
 app = Flask(__name__)
+
 app.secret_key = 'your-secret-key'  # Replace with a strong secret key!
 
 DATA_FILE = "data.json"
@@ -14,6 +22,19 @@ USER_FILE = "users.json"
 RAZORPAY_KEY_ID = "rzp_test_kMgEjsazSMD4Np"
 RAZORPAY_KEY_SECRET = "mtkkq6YzFuDXoKSjI2F56W8M"
 razorpay_client = razorpay.Client(auth=(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET))
+
+google_bp = make_google_blueprint(
+    client_id="514753570844-43nhmurlp0361nqga41oussdn0p4nc1f.apps.googleusercontent.com",
+    client_secret="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",
+    redirect_url="/login/google/authorized",
+    scope=[
+        "openid",
+        "https://www.googleapis.com/auth/userinfo.email",
+        "https://www.googleapis.com/auth/userinfo.profile"
+    ]
+)
+app.register_blueprint(google_bp, url_prefix="/login")
+
 
 # Load/save functions
 def load_data():
@@ -38,6 +59,7 @@ def save_users(users):
     with open(USER_FILE, 'w') as f:
         json.dump(users, f, indent=2)
 
+
 # Routes
 @app.route('/')
 def home():
@@ -54,6 +76,25 @@ def home():
     # )
     return render_template('index.html', username=session['user'], total=total,fund_usage=data['fund_usage'], RAZORPAY_KEY_ID=RAZORPAY_KEY_ID)
 
+
+@app.route("/google_login")
+def google_login():
+    if not google.authorized:
+        return redirect(url_for("google.login"))
+
+    resp = google.get("https://www.googleapis.com/oauth2/v2/userinfo")
+    assert resp.ok, resp.text
+    user_info = resp.json()
+
+    session["user"] = user_info["email"]
+
+    # Optionally store in users.json
+    users = load_users()
+    if session["user"] not in users:
+        users[session["user"]] = "google_oauth"
+        save_users(users)
+
+    return redirect("/")
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
