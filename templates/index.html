@@ -1,52 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>₹1 Project</title>
+  <meta charset="UTF-8">
+  <title>₹1 Project - Dashboard</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
-  <h1>Hello, {{ username }}!</h1>
-  <a href="/logout">Logout</a>
-  <h2>Total Collected: ₹{{ total }}</h2>
+  <header class="navbar">
+    <div class="logo">₹1 Project</div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Impact</a>
+      <a href="#">Contact</a>
+      <a href="/logout" class="logout">Logout</a>
+    </nav>
+  </header>
 
-  <h3>Contribute ₹1 via UPI</h3>
-  <button onclick="payNow()">Pay ₹1 Now</button>
+  <main class="dashboard">
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Welcome, {{ username }} 👋</h1>
+        <p>Your contributions are helping provide affordable healthcare & social good.</p>
+        <h2>Total Collected: ₹{{ total }}</h2>
+        <button onclick="payNow()">Contribute ₹1 Now</button>
+      </div>
+      <div class="hero-image">
+        <img src="{{ url_for('static', filename='donate.png') }}" alt="Donate Illustration" />
+      </div>
+    </section>
 
-  <h3>Add Fund Usage (Admin)</h3>
-  <form id="usageForm">
-    <input type="text" name="cause" placeholder="Cause" required />
-    <input type="number" name="amount" placeholder="Amount" required />
-    <button type="submit">Add Usage</button>
-  </form>
+    <section class="fund-usage">
+      <h2>Fund Usage Log</h2>
+      <ul>
+        {% for item in fund_usage %}
+          <li>{{ item.cause }} — ₹{{ item.amount }} on {{ item.timestamp[:10] }}</li>
+        {% endfor %}
+      </ul>
+    </section>
 
-  <h3>Fund Usage Log</h3>
-  <ul>
-    {% for item in fund_usage %}
-      <li>{{ item.cause }} - ₹{{ item.amount }} on {{ item.timestamp[:10] }}</li>
-    {% endfor %}
-  </ul>
+    <section class="admin-section">
+      <h3>Add Fund Usage (Admin)</h3>
+      <form id="usageForm">
+        <input type="text" name="cause" placeholder="Cause" required />
+        <input type="number" name="amount" placeholder="Amount" required />
+        <button type="submit">Add Usage</button>
+      </form>
+    </section>
+  </main>
 
   <script>
     async function payNow() {
       const res = await fetch('/create_order', { method: 'POST' });
       const order = await res.json();
-
       const options = {
-        "key": "{{ RAZORPAY_KEY_ID }}",  // Passed from Flask backend
-        "amount": order.amount,
-        "currency": "INR",
-        "name": "One Rupee Project",
-        "description": "Daily ₹1 Contribution",
-        "order_id": order.id,
-        "handler": async function (response) {
+        key: "{{ RAZORPAY_KEY_ID }}",
+        amount: order.amount,
+        currency: "INR",
+        name: "₹1 Project",
+        description: "Daily ₹1 Contribution",
+        order_id: order.id,
+        handler: async function (response) {
           await fetch('/payment_success', { method: 'POST' });
           alert("Thank you for contributing ₹1!");
           location.reload();
         },
-        "theme": {
-          "color": "#3399cc"
-        }
+        theme: { color: "#007bff" }
       };
       const rzp = new Razorpay(options);
       rzp.open();
@@ -56,7 +76,7 @@
       e.preventDefault();
       const formData = new FormData(this);
       await fetch('/add_usage', { method: 'POST', body: formData });
-      alert('Usage added!');
+      alert("Usage added!");
       location.reload();
     };
   </script>

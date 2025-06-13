@@ -1,20 +1,31 @@
-/* style.css */
+/* style.css – Modern version for ₹1 Project
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f7f8;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #e0f7fa, #f0f9ff);
   margin: 0;
-  padding: 0 20px;
+  padding: 0;
   color: #333;
 }
 
+.container {
+  max-width: 800px;
+  margin: 60px auto;
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
 h1, h2, h3 {
-  color: #3399cc;
+  color: #0077b6;
+  margin-top: 0;
 }
 
 a {
+  color: #0077b6;
   text-decoration: none;
-  color: #3399cc;
   font-weight: bold;
 }
 
@@ -22,65 +33,177 @@ a:hover {
   text-decoration: underline;
 }
 
+.logout-link {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 14px;
+  background: #0077b6;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.logout-link:hover {
+  background: #005f87;
+}
+
 button {
-  background-color: #3399cc;
+  background-color: #00b4d8;
   border: none;
   color: white;
-  padding: 10px 20px;
-  font-size: 1rem;
+  padding: 12px 24px;
+  font-size: 16px;
+  margin-top: 10px;
+  border-radius: 6px;
   cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+  transition: background 0.3s ease;
 }
 
 button:hover {
-  background-color: #2a7ba0;
+  background-color: #0096c7;
 }
 
 form {
-  margin-top: 15px;
-  margin-bottom: 30px;
+  margin: 25px 0;
 }
 
-input[type="text"], input[type="number"], input[type="password"], input[type="email"] {
-  padding: 8px;
+input[type="text"], input[type="number"], input[type="password"] {
+  padding: 10px;
   font-size: 1rem;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 6px;
   width: 250px;
-  margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 ul {
-  list-style: none;
+  list-style-type: none;
   padding: 0;
 }
 
 li {
-  background-color: #e1ecf7;
-  margin: 5px 0;
+  background: #caf0f8;
+  margin: 8px 0;
+  padding: 12px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+} */
+/* Global Styles */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f0f4f8;
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+button {
+  padding: 12px 20px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+input[type="text"],
+input[type="number"] {
   padding: 10px;
-  border-radius: 5px;
+  width: 250px;
+  margin-right: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
 
-.container {
-  max-width: 600px;
-  margin: auto;
-  background-color: white;
+/* Header/Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.navbar .logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.navbar nav a {
+  margin-left: 20px;
+  font-weight: 500;
+  color: #333;
+}
+
+.navbar .logout {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+}
+
+/* Main Dashboard */
+.dashboard {
+  padding: 40px;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  border-radius: 12px;
+  padding: 40px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.hero-text {
+  max-width: 50%;
+}
+
+.hero-image img {
+  width: 300px;
+  max-width: 100%;
+}
+
+.fund-usage {
+  background: white;
   padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.fund-usage ul {
+  list-style: none;
+  padding: 0;
+}
+
+.fund-usage li {
+  margin: 8px 0;
+  background: #e0f7fa;
+  padding: 10px 15px;
   border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.1);
-  margin-top: 40px;
 }
 
-.logout-link {
-  float: right;
-  margin-top: -40px;
+.admin-section {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
-
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-hgf
